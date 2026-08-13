@@ -1,0 +1,17 @@
+name: build
+
+on:
+  push: { branches: [main] }
+  pull_request:
+  repository_dispatch: { types: [base-image-updated] }
+  workflow_dispatch:
+
+permissions: { contents: read, packages: write, id-token: write, security-events: write }
+
+jobs:
+  pipeline:
+    uses: __OWNER__/opslab-shared/.github/workflows/app-pipeline.yml@v1
+    secrets: inherit
+    with:
+      app: fleet-shell
+      base-digest: ${{ github.event.client_payload.digest || '' }}

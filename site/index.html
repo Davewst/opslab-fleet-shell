@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fleet Shell — decommission rehearsal</title>
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="home" href="/"><span aria-hidden="true">&#8592;</span> All sandboxes</a>
+
+<header>
+  <div>
+    <h1>Fleet Shell</h1>
+    <div class="sub">lab-a–lab-c · rehearsal environment · nothing here is real</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="gauge" title="Blast radius of the last command">
+    <div class="g1" id="g1">read only</div>
+    <div class="g2" id="g2">reversible</div>
+    <div class="g3" id="g3">irreversible</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="col">
+    <div id="term"></div>
+    <div id="inputline">
+      <span id="prompt"></span><input id="cmd" autocomplete="off" spellcheck="false" autofocus>
+    </div>
+  </div>
+
+  <aside>
+    <section>
+      <h2>Change control</h2>
+      <div class="env-pick" id="envpick">
+        <button data-env="DEV" class="on">Dev</button>
+        <button data-env="STG">Stg</button>
+        <button data-env="PROD">Prod</button>
+      </div>
+      <div class="sp-10"></div>
+      <div class="gate" id="gate">
+        <p id="gatetext">your approver has not approved a host-level change for this environment. Destructive commands will be refused.</p>
+        <button id="gatebtn">Request approval</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Session</h2>
+      <div class="kv"><span>host</span><span id="s-host">lab-b</span></div>
+      <div class="kv"><span>user</span><span id="s-user">labuser</span></div>
+      <div class="kv"><span>containers up</span><span id="s-ctr">—</span></div>
+      <div class="kv"><span>runner</span><span id="s-run">—</span></div>
+      <div class="kv"><span>backup on disk</span><span id="s-bak">none</span></div>
+    </section>
+
+    <section>
+      <h2>Objective — retire reporting-api</h2>
+      <ul class="tasks" id="tasks"></ul>
+    </section>
+
+    <section>
+      <h2>Getting around</h2>
+      <p class="hint">
+        <code>help</code> lists everything. Try <code>ssh lab-a</code> to move hosts,
+        <code>sudo</code> for privilege, <code>systemctl show -p ExecStart</code> before you trust a path.
+        <code>reset</code> puts the fleet back.
+      </p>
+    </section>
+  </aside>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
