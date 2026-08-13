@@ -10,7 +10,7 @@ permissions: { contents: read, packages: write, id-token: write, security-events
 
 jobs:
   pipeline:
-    uses: __OWNER__/opslab-shared/.github/workflows/app-pipeline.yml@v1
+    uses: __Davewst__/opslab-shared/.github/workflows/app-pipeline.yml@v1
     secrets: inherit
     with:
       app: fleet-shell

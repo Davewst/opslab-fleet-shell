@@ -14,13 +14,13 @@ function world(){return {
    '/home/runner/actions-runner/externals':{d:['node20','node24']},
   },
   files:{
-   '/opt/apps/reporting-api/docker-compose.yml':'services:\n  reporting-api-api:\n    image: ghcr.io/owner/reporting-api-api:1.9.4\n    restart: unless-stopped\n  reporting-api-ui:\n    image: ghcr.io/owner/reporting-api-ui:1.9.4\n    restart: unless-stopped',
+   '/opt/apps/reporting-api/docker-compose.yml':'services:\n  reporting-api-api:\n    image: ghcr.io/Davewst/reporting-api-api:1.9.4\n    restart: unless-stopped\n  reporting-api-ui:\n    image: ghcr.io/Davewst/reporting-api-ui:1.9.4\n    restart: unless-stopped',
    '/opt/apps/reporting-api/.env':'APP_ENV=prod\nDB_HOST=opslab-db-01\nDB_USER=aqc_ro',
    '/home/runner/actions-runner/.env':'ACTIONS_RUNNER_HOOK_JOB_STARTED=\n# FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 not set',
   },
   containers:[
-   {n:'reporting-api-api',img:'ghcr.io/owner/reporting-api-api:1.9.4',up:true,rm:false},
-   {n:'reporting-api-ui',img:'ghcr.io/owner/reporting-api-ui:1.9.4',up:true,rm:false},
+   {n:'reporting-api-api',img:'ghcr.io/Davewst/reporting-api-api:1.9.4',up:true,rm:false},
+   {n:'reporting-api-ui',img:'ghcr.io/Davewst/reporting-api-ui:1.9.4',up:true,rm:false},
    {n:'watchtower',img:'containrrr/watchtower:1.7.1',up:true,rm:false},
   ],
   services:{'reporting-api':{state:'active',enabled:true,exec:'/usr/bin/docker compose -f /opt/apps/reporting-api/docker-compose.yml up'}},
@@ -39,10 +39,10 @@ function world(){return {
    '/home/runner/actions-runner/externals':{d:['node20']},
   },
   files:{
-   '/opt/apps/shared/docker-compose.yml':'services:\n  catalog-ui-ui:\n    image: ghcr.io/owner/catalog-ui-ui:3.2.0\n  opslab-portal:\n    image: ghcr.io/owner/opslab-portal:5.1.2',
+   '/opt/apps/shared/docker-compose.yml':'services:\n  catalog-ui-ui:\n    image: ghcr.io/Davewst/catalog-ui-ui:3.2.0\n  opslab-portal:\n    image: ghcr.io/Davewst/opslab-portal:5.1.2',
   },
   containers:[
-   {n:'opslab-portal',img:'ghcr.io/owner/opslab-portal:5.1.2',up:true,rm:false},
+   {n:'opslab-portal',img:'ghcr.io/Davewst/opslab-portal:5.1.2',up:true,rm:false},
    {n:'watchtower',img:'containrrr/watchtower:1.7.1',up:true,rm:false},
   ],
   services:{}, runner:{svc:'active',registered:true}, workflow:'enabled', dangling:7,
@@ -175,7 +175,7 @@ function run(raw){
  case 'gh': return ghcmd(a.slice(1));
 
  case './svc.sh': {
-  if(a[1]==='status'){radius(1);out(`actions.runner.owner-${host}.service - Active: ${h.runner.svc}`);break;}
+  if(a[1]==='status'){radius(1);out(`actions.runner.Davewst-${host}.service - Active: ${h.runner.svc}`);break;}
   if(a[1]==='stop'){radius(2);h.runner.svc='inactive';out('Stopping actions.runner service...','good');break;}
   if(a[1]==='uninstall'){ if(!gate('runner service uninstall')){radius(3);break;} radius(3);h.runner.svc='removed';out('Removing systemd unit','good');break;}
   out('usage: ./svc.sh status|stop|uninstall','err'); break;
